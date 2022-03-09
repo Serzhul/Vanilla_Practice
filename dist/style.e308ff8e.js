@@ -117,132 +117,74 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"ProductListPage.js":[function(require,module,exports) {
-"use strict";
+})({"../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = ProductListPage;
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
 
-function ProductListPage(_ref) {
-  var $target = _ref.$target;
-  var $page = document.createElement('div');
-  $page.className = 'ProductListPage';
-  $page.innerHTML = '<h1>상품 목록</h1>';
-
-  this.render = function () {
-    $target.appendChild($page);
-  };
+  return bundleURL;
 }
-},{}],"ProductDetailPage.js":[function(require,module,exports) {
-"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = ProductDetailPage;
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
 
-function ProductDetailPage(_ref) {
-  var $target = _ref.$target,
-      productId = _ref.productId;
-  this.state = {
-    productId: productId
-  };
-  var $page = document.createElement('div');
-  $page.className = 'ProductDetailPage';
-  $page.innerHTML = '<h1>상품 정보</h1>';
-
-  this.render = function () {
-    $target.appendChild($page);
-  };
-}
-},{}],"CartPage.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = CartPage;
-
-function CartPage(_ref) {
-  var $target = _ref.$target;
-  var $page = document.createElement('div');
-  $page.innerHTML = '<h1>장바구니</h1>';
-
-  this.render = function () {
-    $target.appendChild($page);
-  };
-}
-},{}],"App.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = App;
-
-var _ProductListPage = _interopRequireDefault(require("./ProductListPage"));
-
-var _ProductDetailPage = _interopRequireDefault(require("./ProductDetailPage"));
-
-var _CartPage = _interopRequireDefault(require("./CartPage"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function App(_ref) {
-  var $target = _ref.$target;
-
-  this.route = function () {
-    var _location = location,
-        pathname = _location.pathname;
-    $target.innerHTML = '';
-
-    if (pathname === '/') {
-      new _ProductListPage.default({
-        $target: $target
-      }).render();
-    } else if (pathname.indexOf('/products/') === 0) {
-      var _pathname$split = pathname.split('/'),
-          _pathname$split2 = _slicedToArray(_pathname$split, 3),
-          productId = _pathname$split2[2];
-
-      new _ProductDetailPage.default({
-        $target: $target,
-        productId: productId
-      }).render();
-    } else if (pathname.indexOf('/cart/' === 0)) {
-      new _CartPage.default({
-        $target: $target
-      }).render();
+    if (matches) {
+      return getBaseURL(matches[0]);
     }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
   };
 
-  this.route();
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
 }
-},{"./ProductListPage":"ProductListPage.js","./ProductDetailPage":"ProductDetailPage.js","./CartPage":"CartPage.js"}],"index.js":[function(require,module,exports) {
-"use strict";
 
-var _App = _interopRequireDefault(require("./App.js"));
+var cssTimeout = null;
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
 
-new _App.default({
-  $target: document.querySelector('.App')
-});
-},{"./App.js":"App.js"}],"../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -446,5 +388,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
-//# sourceMappingURL=/Vanilla%20Projects.e31bb0bc.js.map
+},{}]},{},["../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/style.e308ff8e.js.map
